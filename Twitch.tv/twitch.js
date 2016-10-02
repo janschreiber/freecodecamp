@@ -1,7 +1,7 @@
 var getChannelData = function(user) {
 
     var clientID = "kz0298j2x1610gtajdg7tw1e83rqjyt",
-        missingLogo = "img/missing.jpg";
+        missingLogo = "https://github.com/janschreiber/freecodecamp/raw/master/Twitch.tv/img/missing.jpg";
 
     // Main ajax function that gets data for each channel.
     $.ajax({

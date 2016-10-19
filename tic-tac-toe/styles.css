@@ -1,126 +1,121 @@
 body {
-  background-color: rgb(32, 32, 32);
-  background-image:url("http://i.imgur.com/oavv3DC.jpg");
-  color: rgb(230, 230, 230);
-  text-align:center;
-  font-family:Arial,Helvetica,sans-serif;
+    background-color: rgb(32, 32, 32);
+    background-image: url("http://i.imgur.com/oavv3DC.jpg");
+    color: rgb(230, 230, 230);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
 h1 {
-  line-height:1em;
-  margin-bottom:0;
-  padding-bottom:5px;
-  font-weight:normal;
+    line-height: 1em;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    font-weight: normal;
 }
-
 table {
-  margin: 5% auto;
-  border-collapse: collapse;
+    margin: 5% auto;
+    border-collapse: collapse;
 }
-
 #table_game {
-  position:relative;
-  font-size:120px;
-  margin: 1% auto;
-  border-collapse: collapse;
-  font-family:Times,monospace;
+    position: relative;
+    font-size: 120px;
+    margin: 1% auto;
+    border-collapse: collapse;
+    font-family: Times, monospace;
 }
-
 .td_game {
-  border:4px solid rgb(230, 230, 230);
-  width:100px;
-  height:100px;
-  padding:0;
-  vertical-align:middle;
-  text-align:center;
+    border: 4px solid rgb(230, 230, 230);
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
 }
-
 .fixed {
-  width:100px;
-  height:100px;
-  line-height:100px;
-  cursor:pointer;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    cursor: pointer;
 }
-
 .td_list {
-  text-align:center;
+    text-align: center;
 }
-
 .th_list {
-  font-weight:normal;
-  text-align:center;
-  text-decoration:underline;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: underline;
 }
-
 .btn {
-  background: #4a4d4f;
-  background-image: -webkit-linear-gradient(top, #4a4d4f, #090a0a);
-  background-image: -moz-linear-gradient(top, #4a4d4f, #090a0a);
-  background-image: -ms-linear-gradient(top, #4a4d4f, #090a0a);
-  background-image: -o-linear-gradient(top, #4a4d4f, #090a0a);
-  background-image: linear-gradient(to bottom, #4a4d4f, #090a0a);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 14px;
-  padding: 8px 16px 8px 16px;
-  text-decoration: none;
+    background: #4a4d4f;
+    background-image: -webkit-linear-gradient(top, #4a4d4f, #090a0a);
+    background-image: -moz-linear-gradient(top, #4a4d4f, #090a0a);
+    background-image: -ms-linear-gradient(top, #4a4d4f, #090a0a);
+    background-image: -o-linear-gradient(top, #4a4d4f, #090a0a);
+    background-image: linear-gradient(to bottom, #4a4d4f, #090a0a);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 8px 16px 8px 16px;
+    text-decoration: none;
 }
-
 .btn:hover {
-  background: #4a4d4f;
-  background-image: -webkit-linear-gradient(top, #4a4d4f, #000000);
-  background-image: -moz-linear-gradient(top, #4a4d4f, #000000);
-  background-image: -ms-linear-gradient(top, #4a4d4f, #000000);
-  background-image: -o-linear-gradient(top, #4a4d4f, #000000);
-  background-image: linear-gradient(to bottom, #4a4d4f, #000000);
-  text-decoration: none;
-  color:gold;
-  cursor:pointer;
+    background: #4a4d4f;
+    background-image: -webkit-linear-gradient(top, #4a4d4f, #000000);
+    background-image: -moz-linear-gradient(top, #4a4d4f, #000000);
+    background-image: -ms-linear-gradient(top, #4a4d4f, #000000);
+    background-image: -o-linear-gradient(top, #4a4d4f, #000000);
+    background-image: linear-gradient(to bottom, #4a4d4f, #000000);
+    text-decoration: none;
+    color: gold;
+    cursor: pointer;
 }
-
 .x {
-  //color:red;
-  cursor:default;
+    /* color:red; */
+    position:relative;
+    top:-8px;
+    font-size: 1.0em;
+    cursor: default;
 }
-
 .o {
-  vertical-align: +10px;
-  font-size:1.1em;
-  cursor:default;
+    position:relative;
+    top:-7px;
+    font-size: 1.0em;
+    cursor: default;
 }
 
-// experimental stuff, diagonal lines
-#red-line-top-left-to-bottom-right
-{
-  display: none;
-  z-index:1;
-  position:absolute;
-  top:0;
-  left:50%;
-  width:4px;
-  height:424px;
-  background-color:red;
-  border-radius:2px;
-  transform:rotate(-45deg);
-  -ms-transform:rotate(-45deg); /* IE 9 */
-  -webkit-transform:rotate(-45deg); /* Safari and Chrome */
-}
+/* experimental stuff, diagonal lines */
 
-#red-line-top-right-to-bottom-left
-{
-  display: none;
-  z-index:1;
-  position:absolute;
-  top:0;
-  right:50%;
-  width:4px;
-  height:424px;
-  background-color:red;
-  border-radius:2px;
-  transform:rotate(45deg);
-  -ms-transform:rotate(45deg); /* IE 9 */
-  -webkit-transform:rotate(45deg); /* Safari and Chrome */
+#red-line-top-left-to-bottom-right {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 424px;
+    background-color: red;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(-45deg);
+    /* Safari and Chrome */
+}
+#red-line-top-right-to-bottom-left {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: 4px;
+    height: 424px;
+    background-color: red;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Safari and Chrome */
 }

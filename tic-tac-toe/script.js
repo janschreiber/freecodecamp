@@ -100,9 +100,10 @@ Grid.prototype.getRowIndices = function (index) {
         return undefined;
     }
     var row = [];
+    index = index * 3;
     row.push(index);
+    row.push(index + 2);
     row.push(index + 3);
-    row.push(index + 6);
     return row;
 };
 
@@ -181,7 +182,7 @@ Grid.prototype.getFirstWithTwoInARow = function (agent) {
                 return freeCells[i];
             }
         }
-        for (var j = 0; j < 2; j++) {
+        for (j = 0; j < 2; j++) {
             var diagV = this.getDiagValues(j);
             var diagI = this.getDiagIndices(j);
             if (sumArray(diagV) == sum && isInArray(freeCells[i], diagI)) {
@@ -309,7 +310,7 @@ function checkWin() {
     }
 
     // columns
-    for (var i = 0; i <= 2; i++) {
+    for (i = 0; i <= 2; i++) {
         var col = myGrid.getColumnValues(i);
         if (col[0] > 0 && col[0] == col[1] && col[0] == col[2]) {
             if (col[0] == computer) {
@@ -327,7 +328,7 @@ function checkWin() {
     }
 
     // diagonals
-    for (var i = 0; i <= 1; i++) {
+    for (i = 0; i <= 1; i++) {
         var diagonal = myGrid.getDiagValues(i);
         if (diagonal[0] > 0 && diagonal[0] == diagonal[1] && diagonal[0] == diagonal[2]) {
             if (diagonal[0] == computer) {

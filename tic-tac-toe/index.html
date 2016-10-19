@@ -1,19 +1,19 @@
-<!DOCTYPE HTML PUBLIC>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Tic-tac-toe</title>
     <link href="styles.css" media="screen" rel="stylesheet" type="text/css">
     <script type="text/JavaScript" src="script.js"></script>
   </head>
-  <body onLoad="initialize()">
-    <h1>Tic-tac-toe</h1>
+  <body onload="initialize()">
+    <h1>Tic-Tac-Toe</h1>
     <table cellspacing="0" cellpadding="0" id="table_game">
-      <tr><td class="td_game"><div id="cell0" onClick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell1" onClick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell2" onClick="cellClicked(this.id)" class="fixed"></div></td></tr>
-      <tr><td class="td_game"><div id="cell3" onClick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell4" onClick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell5" onClick="cellClicked(this.id)" class="fixed"></div></td></tr>
-      <tr><td class="td_game"><div id="cell6" onClick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell7" onClick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell8" onClick="cellClicked(this.id)" class="fixed"></div></td></tr>
+      <tr><td class="td_game"><div id="cell0" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell1" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell2" onclick="cellClicked(this.id)" class="fixed"></div></td></tr>
+      <tr><td class="td_game"><div id="cell3" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell4" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell5" onclick="cellClicked(this.id)" class="fixed"></div></td></tr>
+      <tr><td class="td_game"><div id="cell6" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell7" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell8" onclick="cellClicked(this.id)" class="fixed"></div></td></tr>
     </table>
-    <button type="button" class="btn" id="restart" onClick="restartGame()">Restart</button>
+    <button type="button" class="btn" id="restart" onclick="restartGame()">Restart</button>
     <table>
       <tr><th class="th_list">Computer</th><th class="th_list" style="padding-right:10px;padding-left:10px">Tie</th><th class="th_list">Player</th></tr>
       <tr><td class="td_list" id="computer_score">0</td><td class="td_list" style="padding-right:10px;padding-left:10px" id="tie_score">0</td><td class="td_list" id="player_score">0</td></tr>

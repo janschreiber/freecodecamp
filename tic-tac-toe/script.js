@@ -81,6 +81,8 @@ var moves = 0,
 
     xText = "<span class=\"x\">&times;</class>",
     oText = "<span class=\"o\">o</class>",
+    playerText = xText,
+    computerText = oText,
     myGrid = null;
 
 //==================================
@@ -255,6 +257,11 @@ function initialize() {
     for (var i = 0; i <= myGrid.cells.length - 1; i++) {
         myGrid.cells[i] = 0;
     }
+    var response = confirm("Do you you want to go first?");
+    if (response === false) {
+        return; // TODO
+    }
+
     // debugger;
 }
 
@@ -268,8 +275,12 @@ function cellClicked(id) {
     }
     moves += 1;
     document.getElementById(id).innerHTML = xText;
-    if (Math.random() < 0.5) {
+    var rand = Math.random();
+    if (rand < 0.3) {
         document.getElementById(id).style.transform="rotate(180deg)";
+    }
+    else if (rand > 0.6) {
+        document.getElementById(id).style.transform="rotate(90deg)";
     }
     document.getElementById(id).style.cursor = "default";
     myGrid.cells[cell] = player;
@@ -330,8 +341,12 @@ function makeComputerMove() {
     console.log("computer chooses " + id);
     document.getElementById(id).innerHTML = oText;
     document.getElementById(id).style.cursor = "default";
-    if (Math.random() < 0.5) {
+    var rand = Math.random();
+    if (rand < 0.3) {
         document.getElementById(id).style.transform="rotate(180deg)";
+    }
+    else if (rand > 0.6) {
+        document.getElementById(id).style.transform="rotate(90deg)";
     }
     myGrid.cells[cell] = computer;
     moves += 1;
@@ -437,5 +452,5 @@ function endGame(who) {
         var id = "cell" + i.toString();
         document.getElementById(id).style.cursor = "default";
     }
-    setTimeout(restartGame, 1000);
+    setTimeout(restartGame, 800);
 }

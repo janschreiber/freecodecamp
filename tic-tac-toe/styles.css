@@ -9,6 +9,7 @@ h1 {
     line-height: 1em;
     margin-bottom: 0;
     padding-bottom: 5px;
+    font-size: 3em;
     font-weight: bold;
 }
 table {
@@ -54,6 +55,7 @@ table {
     overflow: hidden;
     /*padding-top: -10px; */
 }
+/* TODO: Löschen */
 .btn {
     background: #4a4d4f;
     background-image: -webkit-linear-gradient(top, #4a4d4f, #090a0a);

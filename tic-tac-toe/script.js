@@ -268,6 +268,9 @@ function cellClicked(id) {
     }
     moves += 1;
     document.getElementById(id).innerHTML = xText;
+    if (Math.random() < 0.5) {
+        document.getElementById(id).style.transform="rotate(180deg)";
+    }
     document.getElementById(id).style.cursor = "default";
     myGrid.cells[cell] = player;
     if (moves >= 5) {
@@ -327,6 +330,9 @@ function makeComputerMove() {
     console.log("computer chooses " + id);
     document.getElementById(id).innerHTML = oText;
     document.getElementById(id).style.cursor = "default";
+    if (Math.random() < 0.5) {
+        document.getElementById(id).style.transform="rotate(180deg)";
+    }
     myGrid.cells[cell] = computer;
     moves += 1;
     if (moves >= 5) {
@@ -431,4 +437,5 @@ function endGame(who) {
         var id = "cell" + i.toString();
         document.getElementById(id).style.cursor = "default";
     }
+    setTimeout(restartGame, 1000);
 }

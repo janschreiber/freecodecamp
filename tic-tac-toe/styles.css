@@ -92,7 +92,7 @@ table {
     color: rgb(32,32,32);
     font-size: 2em;
     font-weight: bold;
-    margin: 20% auto; /* 20 % from the top and centered */
+    margin: 16% auto; /* 16 % from the top and centered */
     padding: 20px;
     border: 1px solid rgb(136,136,136);
     width: 380px;

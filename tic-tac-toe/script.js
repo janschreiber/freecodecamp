@@ -27,21 +27,35 @@ player or by the computer itself. If the computer can win by
 completing a sequence, it does so; if it can block the player from
 winning with the next move, it does that. If none of that applies,
 it plays the center field if that's free, otherwise it selects a
-random free field.
+random free field. This is not a 100 % certain strategy, but the
+gameplay experience is fairly decent.
 
 */
 
 //==================================
-// HELPER FUNCTIONS
+// EVENT BINDINGS
 //==================================
+
+// Bind Esc key to closing the modal dialog
 document.onkeypress = function(evt) {
     evt = evt || window.event;
+    var modal = document.getElementsByClassName("modal")[0];
     if (evt.keyCode === 27) {
-        closeModal("winAnnounce");
-        // TODO
+        modal.style.display = "none";
     }
 };
 
+// When the user clicks anywhere outside of the modal dialog, close it
+window.onclick = function(evt) {
+    var modal = document.getElementsByClassName("modal")[0];
+    if (evt.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
+//==================================
+// HELPER FUNCTIONS
+//==================================
 function sumArray(array) {
     var sum = 0,
         i = 0;
@@ -83,7 +97,7 @@ var moves = 0,
     o = 3,
     player = x,
     computer = o,
-    whoseTurn = player,
+    whoseTurn = x,
     gameOver = false,
     score = {
         ties: 0,
@@ -130,6 +144,7 @@ Grid.prototype.getFreeCellIndices = function () {
 // Returns the values of the elements.
 Grid.prototype.getRowValues = function (index) {
     if (index !== 0 && index !== 1 && index !== 2) {
+        console.error("Wrong arg for getRowValues!");
         return undefined;
     }
     var i = index * 3;
@@ -140,6 +155,7 @@ Grid.prototype.getRowValues = function (index) {
 // Returns an array with the indices, not their values.
 Grid.prototype.getRowIndices = function (index) {
     if (index !== 0 && index !== 1 && index !== 2) {
+        console.error("Wrong arg for getRowIndices!");
         return undefined;
     }
     var row = [];
@@ -153,6 +169,7 @@ Grid.prototype.getRowIndices = function (index) {
 // get a column (values)
 Grid.prototype.getColumnValues = function (index) {
     if (index !== 0 && index !== 1 && index !== 2) {
+        console.error("Wrong arg for getColumnValues!");
         return undefined;
     }
     var i, column = [];
@@ -165,6 +182,7 @@ Grid.prototype.getColumnValues = function (index) {
 // get a column (indices)
 Grid.prototype.getColumnIndices = function (index) {
     if (index !== 0 && index !== 1 && index !== 2) {
+        console.error("Wrong arg for getColumnIndices!");
         return undefined;
     }
     var i, column = [];
@@ -180,6 +198,7 @@ Grid.prototype.getColumnIndices = function (index) {
 Grid.prototype.getDiagValues = function (arg) {
     var cells = [];
     if (arg !== 1 && arg !== 0) {
+        console.error("Wrong arg for getDiagValues!");
         return undefined;
     } else if (arg === 0) {
         cells.push(this.cells[0]);
@@ -198,6 +217,7 @@ Grid.prototype.getDiagValues = function (arg) {
 // arg 1: from top-right
 Grid.prototype.getDiagIndices = function (arg) {
     if (arg !== 1 && arg !== 0) {
+        console.error("Wrong arg for getDiagIndices!");
         return undefined;
     } else if (arg === 0) {
         return [0, 4, 8];
@@ -245,15 +265,16 @@ Grid.prototype.reset = function () {
 };
 
 //==================================
-// EVENT CALLBACKS
+// MAIN FUNCTIONS
 //==================================
+
 // executed when the page loads
 function initialize() {
     myGrid = new Grid();
     moves = 0;
     winner = 0;
-    whoseTurn = player;
     gameOver = false;
+    whoseTurn = player; // default, this may change
     for (var i = 0; i <= myGrid.cells.length - 1; i++) {
         myGrid.cells[i] = 0;
     }
@@ -261,7 +282,7 @@ function initialize() {
     // debugger;
 }
 
-// Ask player if they want to play as X or O
+// Ask player if they want to play as X or O. X goes first.
 function assignRoles() {
     var response = confirm("Do you you want to go first?");
     if (response === true) {
@@ -280,17 +301,18 @@ function assignRoles() {
     }
 }
 
-// executed when player clicks one of the cells
+// executed when player clicks one of the table cells
 function cellClicked(id) {
-    // The last character of the id corresponds to the index in Grid.cells
+    // The last character of the id corresponds to the numeric index in Grid.cells:
     var idName = id.toString();
     var cell = parseInt(idName[idName.length - 1]);
     if (myGrid.cells[cell] > 0 || whoseTurn !== player || gameOver) {
-        // cell is already occupied
+        // cell is already occupied or something else is wrong
         return false;
     }
     moves += 1;
     document.getElementById(id).innerHTML = playerText;
+    // randomize orientation (for looks only)
     var rand = Math.random();
     if (rand < 0.3) {
         document.getElementById(id).style.transform = "rotate(180deg)";
@@ -299,6 +321,7 @@ function cellClicked(id) {
     }
     document.getElementById(id).style.cursor = "default";
     myGrid.cells[cell] = player;
+    // Test if we have a winner:
     if (moves >= 5) {
         winner = checkWin();
     }

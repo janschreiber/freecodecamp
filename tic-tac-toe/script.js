@@ -1,4 +1,5 @@
 "use strict";
+
 /*
 
 A SIMPLE TIC-TAC-TOE GAME IN JAVASCRIPT
@@ -18,7 +19,7 @@ if the sum of all the cells in a row is 9, the computer wins,
 if it is 3 and all the cells are occupied, the human player wins,
 etc.
 
-(2) Strategy
+(2) Strategy of makeComputerMove()
 
 The computer first  looks for almost completed rows, columns, and
 diagonals, where there are two fields occupied either by the human
@@ -33,6 +34,14 @@ random free field.
 //==================================
 // HELPER FUNCTIONS
 //==================================
+document.onkeypress = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode === 27) {
+        closeModal("winAnnounce");
+        // TODO
+    }
+};
+
 function sumArray(array) {
     var sum = 0,
         i = 0;
@@ -448,13 +457,22 @@ function checkWin() {
     return winner;
 }
 
+function announceWinner(text) {
+    document.getElementById("winText").innerHTML = text;
+    document.getElementById("winAnnounce").style.display = "block";
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+}
+
 function endGame(who) {
-    if (who == 10) {
-        alert("It's a tie!");
+    if (who == player) {
+        announceWinner("Congratulations, you won!");
     } else if (who == computer) {
-        alert("Computer wins!");
+        announceWinner("Computer wins!");
     } else {
-        alert("Congratulations, you won!");
+        announceWinner("It's a tie!");
     }
     gameOver = true;
     whoseTurn = 0;

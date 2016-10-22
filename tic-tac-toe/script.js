@@ -37,7 +37,7 @@ gameplay experience is fairly decent.
 //==================================
 
 // Bind Esc key to closing the modal dialog
-document.onkeypress = function(evt) {
+document.onkeypress = function (evt) {
     evt = evt || window.event;
     var modal = document.getElementsByClassName("modal")[0];
     if (evt.keyCode === 27) {
@@ -46,7 +46,7 @@ document.onkeypress = function(evt) {
 };
 
 // When the user clicks anywhere outside of the modal dialog, close it
-window.onclick = function(evt) {
+window.onclick = function (evt) {
     var modal = document.getElementsByClassName("modal")[0];
     if (evt.target === modal) {
         modal.style.display = "none";
@@ -278,27 +278,38 @@ function initialize() {
     for (var i = 0; i <= myGrid.cells.length - 1; i++) {
         myGrid.cells[i] = 0;
     }
-    assignRoles();
+    setTimeout(assignRoles, 500);
     // debugger;
 }
 
 // Ask player if they want to play as X or O. X goes first.
 function assignRoles() {
-    var response = confirm("Do you you want to go first?");
-    if (response === true) {
-        player = x;
-        computer = o;
-        whoseTurn = player;
-        playerText = xText;
-        computerText = oText;
-    } else {
-        player = o;
-        computer = x;
-        whoseTurn = computer;
-        playerText = oText;
-        computerText = xText;
-        makeComputerMove();
-    }
+    askUser("Do you want to go first?");
+    document.getElementById("yesBtn").addEventListener("click", makePlayerX);
+    document.getElementById("noBtn").addEventListener("click", makePlayerO);
+}
+
+function makePlayerX() {
+    player = x;
+    computer = o;
+    whoseTurn = player;
+    playerText = xText;
+    computerText = oText;
+    document.getElementById("userFeedback").style.display = "none";
+    document.getElementById("yesBtn").removeEventListener("click", makePlayerX);
+    document.getElementById("noBtn").removeEventListener("click", makePlayerO);
+}
+
+function makePlayerO() {
+    player = o;
+    computer = x;
+    whoseTurn = computer;
+    playerText = oText;
+    computerText = xText;
+    setTimeout(makeComputerMove, 400);
+    document.getElementById("userFeedback").style.display = "none";
+    document.getElementById("yesBtn").removeEventListener("click", makePlayerX);
+    document.getElementById("noBtn").removeEventListener("click", makePlayerO);
 }
 
 // executed when player clicks one of the table cells
@@ -332,7 +343,8 @@ function cellClicked(id) {
     return true;
 }
 
-// executed when player hits restart button
+// Executed when player hits restart button.
+// ask should be true if we should ask users if they want to play as X or O
 function restartGame(ask) {
     if (moves > 0) {
         var response = confirm("Are you sure you want to start over?");
@@ -349,15 +361,16 @@ function restartGame(ask) {
         var id = "cell" + i.toString();
         document.getElementById(id).innerHTML = "";
         document.getElementById(id).style.cursor = "pointer";
+        document.getElementById(id).classList.remove("win-color");
     }
     if (ask === true) {
-        assignRoles();
+        setTimeout(assignRoles, 200);
     } else if (whoseTurn == computer) {
-        setTimeout(makeComputerMove, 500);
+        setTimeout(makeComputerMove, 800);
     }
 }
 
-// The core logic of the game
+// The core logic of the game AI:
 function makeComputerMove() {
     // debugger;
     if (gameOver) {
@@ -387,7 +400,6 @@ function makeComputerMove() {
             cell = myArr[intRandom(0, myArr.length - 1)];
         }
     }
-    // console.log("cell = " + cell);
     var id = "cell" + cell.toString();
     // console.log("computer chooses " + id);
     document.getElementById(id).innerHTML = computerText;
@@ -427,7 +439,13 @@ function checkWin() {
                 winner = player;
                 // console.log("player wins");
             }
-            endGame(winner);
+            // Give the winning row/column/diagonal a different bg-color
+            var tmpAr = myGrid.getRowIndices(i);
+            for (var j = 0; j < tmpAr.length; j++) {
+                var str = "cell" + tmpAr[j];
+                document.getElementById(str).classList.add("win-color");
+            }
+            setTimeout(endGame, 1000, winner);
             return winner;
         }
     }
@@ -445,7 +463,13 @@ function checkWin() {
                 winner = player;
                 // console.log("player wins");
             }
-            endGame(winner);
+            // Give the winning row/column/diagonal a different bg-color
+            var tmpAr = myGrid.getColumnIndices(i);
+            for (var j = 0; j < tmpAr.length; j++) {
+                var str = "cell" + tmpAr[j];
+                document.getElementById(str).classList.add("win-color");
+            }
+            setTimeout(endGame, 1000, winner);
             return winner;
         }
     }
@@ -463,7 +487,13 @@ function checkWin() {
                 winner = player;
                 // console.log("player wins");
             }
-            endGame(winner);
+            // Give the winning row/column/diagonal a different bg-color
+            var tmpAr = myGrid.getDiagIndices(i);
+            for (var j = 0; j < tmpAr.length; j++) {
+                var str = "cell" + tmpAr[j];
+                document.getElementById(str).classList.add("win-color");
+            }
+            setTimeout(endGame, 1000, winner);
             return winner;
         }
     }
@@ -483,6 +513,12 @@ function checkWin() {
 function announceWinner(text) {
     document.getElementById("winText").innerHTML = text;
     document.getElementById("winAnnounce").style.display = "block";
+    setTimeout(closeModal, 1400, "winAnnounce");
+}
+
+function askUser(text) {
+    document.getElementById("questionText").innerHTML = text;
+    document.getElementById("userFeedback").style.display = "block";
 }
 
 function closeModal(id) {

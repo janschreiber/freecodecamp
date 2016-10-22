@@ -34,7 +34,7 @@ table {
     width: 90px;
     height: 90px;
     line-height: 90px;
-    display:block;
+    display: block;
     overflow: hidden;
     cursor: pointer;
 }
@@ -58,16 +58,16 @@ table {
     overflow: hidden;
 }
 .x {
-    color:darksalmon;
-    position:relative;
-    top:-8px;
+    color: darksalmon;
+    position: relative;
+    top: -8px;
     font-size: 1.2em;
     cursor: default;
 }
 .o {
-    color:aquamarine;
-    position:relative;
-    top:-7px;
+    color: aquamarine;
+    position: relative;
+    top: -7px;
     font-size: 1.0em;
     cursor: default;
 }
@@ -83,37 +83,45 @@ table {
     height: 100%;
     overflow: auto; /* enable scroll if needed */
     background-color: black; /* fallback color */
-    background-color: rgba(0,0,0,0.6); /* black with opacity */
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 /* modal content */
 .modal-content {
-    background-color: rgb(240,240,240);
-    color: rgb(32,32,32);
+    background-color: rgb(240, 240, 240);
+    color: rgb(32, 32, 32);
     font-size: 2em;
     font-weight: bold;
-    margin: 16% auto; /* 16 % from the top and centered */
+    /* 16 % from the top and centered */
+    margin: 16% auto;
     padding: 20px;
-    border: 1px solid rgb(136,136,136);
+    border: 2px solid black;
+    border-radius: 10px;
     width: 380px;
     max-width: 80%;
-    transition: height 0.2s; /* 0.2 second transition effect to slide in the modal */
+}
+.modal-content p {
+    margin: 0;
+    padding: 0;
 }
 
 /* close button for modal dialog */
 .close {
-    color: rgb(170,170,170);
+    color: rgb(170, 170, 170);
     float: right;
     position: relative;
     top: -25px;
     right: -10px;
-    font-size: 28px;
+    font-size: 34px;
     font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.win-color {
+    background-color: rgb(240, 240, 240);
 }

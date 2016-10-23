@@ -376,8 +376,9 @@ function makeComputerMove() {
     if (gameOver) {
         return false;
     }
-    var cell = -1;
-    var myArr = [];
+    var cell = -1,
+        myArr = [],
+        corners = [0,2,6,8];
     if (moves >= 3) {
         cell = myGrid.getFirstWithTwoInARow(computer);
         if (cell === false) {
@@ -391,6 +392,12 @@ function makeComputerMove() {
                 cell = myArr[intRandom(0, myArr.length - 1)];
             }
         }
+    } else if (moves === 1 && myGrid.cells[4] > 0) {
+        // if player is X and played center, play one of the corners
+        cell = corners[intRandom(0,3)];
+    } else if (moves === 0 && intRandom(1,10) < 7) {
+        // if computer is X, start with one of the corners sometimes
+        cell = corners[intRandom(0,3)];
     } else {
         // choose the center of the board if possible
         if (myGrid.cells[4] === 0) {

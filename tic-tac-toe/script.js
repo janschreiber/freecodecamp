@@ -74,7 +74,8 @@ function isInArray(element, array) {
 
 function shuffleArray(array) {
     var counter = array.length,
-        temp, index;
+        temp,
+        index;
     while (counter > 0) {
         index = Math.floor(Math.random() * counter);
         counter--;
@@ -232,8 +233,8 @@ Grid.prototype.getFirstWithTwoInARow = function (agent) {
         console.error("Function getFirstWithTwoInARow accepts only player or computer as argument.");
         return undefined;
     }
-    var sum = agent * 2;
-    var freeCells = shuffleArray(this.getFreeCellIndices());
+    var sum = agent * 2,
+        freeCells = shuffleArray(this.getFreeCellIndices());
     for (var i = 0; i < freeCells.length; i++) {
         for (var j = 0; j < 3; j++) {
             var rowV = this.getRowValues(j);
@@ -390,6 +391,25 @@ function makeComputerMove() {
             } else {
                 myArr = myGrid.getFreeCellIndices();
                 cell = myArr[intRandom(0, myArr.length - 1)];
+            }
+        }
+        // Avoid a catch-22 situation:
+        if (moves == 3 && myGrid.cells[4] == computer && player == x) {
+            if (myGrid.cells[7] == player && (myGrid.cells[0] == player || myGrid.cells[2] == player)) {
+                myArr = [6,8];
+                cell = myArr[intRandom(0,1)];
+            }
+            else if (myGrid.cells[5] == player && (myGrid.cells[0] == player || myGrid.cells[6] == player)) {
+                myArr = [2,8];
+                cell = myArr[intRandom(0,1)];
+            }
+            else if (myGrid.cells[3] == player && (myGrid.cells[2] == player || myGrid.cells[8] == player)) {
+                myArr = [0,6];
+                cell = myArr[intRandom(0,1)];
+            }
+            else if (myGrid.cells[1] == player && (myGrid.cells[6] == player || myGrid.cells[8] == player)) {
+                myArr = [0,2];
+                cell = myArr[intRandom(0,1)];
             }
         }
     } else if (moves === 1 && myGrid.cells[4] > 0) {

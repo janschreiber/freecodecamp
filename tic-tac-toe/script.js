@@ -412,7 +412,7 @@ function makeComputerMove() {
                 cell = myArr[intRandom(0,1)];
             }
         }
-    } else if (moves === 1 && myGrid.cells[4] > 0) {
+    } else if (moves === 1 && myGrid.cells[4] == player) {
         // if player is X and played center, play one of the corners
         cell = corners[intRandom(0,3)];
     } else if (moves === 0 && intRandom(1,10) < 7) {

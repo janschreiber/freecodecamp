@@ -415,7 +415,21 @@ function makeComputerMove() {
     } else if (moves === 1 && myGrid.cells[4] == player) {
         // if player is X and played center, play one of the corners
         cell = corners[intRandom(0,3)];
-    } else if (moves === 0 && intRandom(1,10) < 7) {
+    } else if (moves === 2 && myGrid.cells[4] == player && computer == x) {
+        // if player is O and played center, take two opposing corners
+        if (myGrid.cells[0] == computer) {
+            cell = 8;
+        }
+        else if (myGrid.cells[2] == computer) {
+            cell = 6;
+        }
+        else if (myGrid.cells[6] == computer) {
+            cell = 2;
+        }
+        else if (myGrid.cells[8] == computer) {
+            cell = 0;
+        }
+    } else if (moves === 0 && intRandom(1,10) < 8) {
         // if computer is X, start with one of the corners sometimes
         cell = corners[intRandom(0,3)];
     } else {

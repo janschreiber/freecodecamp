@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Thermometer</title>
+    <script type="text/JavaScript" src="script.js"></script>
+    <script type="text/JavaScript">
+    var temperature = -12;
+    settings = {};
+    settings.units = '';
+
+function drawThermometer()
+{
+    if (settings.units == 'Metric')
+    {
+        var tmp = document.getElementById('temperature').innerHTML;
+        tmp = tmp.replace(new RegExp('\s*°[C]$'), '');
+        tmp = parseFloat(tmp);
+    }
+    else
+    {
+        var tmp = document.getElementById('temperature').innerHTML;
+        tmp = tmp.replace(new RegExp('\s*°[F]$'), '');
+        tmp = parseFloat(tmp);
+    }
+}
+
+    function labelThermometer()
+    {
+        if (settings.units == 'Metric')
+        {
+            if (temperature < -22)
+            {
+                temperature = -22;
+            }
+            else if (temperature > 52)
+            {
+                temperature = 52;
+            }
+            document.getElementById('saeule').style.height = ((temperature * 2) + 45).toString() + 'px';
+            for (var i = 0; i <= 70; i += 10)
+            {
+                myText = '<div id=\"marker' + (i-20).toString() + '\" style=\"font-size:0.5em;position:absolute;left:0px;bottom:' + (i*2).toString() + 'px\">&minus;';
+                if ((i-20) % 10 === 0)
+                {
+                    if (i-20 === 0)
+                    {
+                      myText += '&nbsp;';
+                    }
+                    if (i-20 >= 0)
+                    {
+                      myText += '&nbsp;';
+                    }
+                    myText += (i-20).toString();
+                }
+                myText += '<\/div>';
+                document.getElementById('roehre').innerHTML += myText;
+            }
+            myText = '<div id=\"marker_unit\" style=\"font-size:0.5em;position:absolute;left:-2px;bottom:150px\">&deg;C<\/div>';
+            document.getElementById('roehre').innerHTML += myText;
+        }
+        else
+        {
+            if (temperature < -30)
+            {
+                temperature = -30;
+            }
+            else if (temperature > 51)
+            {
+                temperature = 51;
+            }
+            document.getElementById('saeule').style.height = (celsiusToFahrenheit(temperature) + 25).toString() + 'px';
+            for (var i = 0; i <= 140; i += 10)
+            {
+                myText = '<div id=\"marker' + (i-20).toString() + '\" style=\"font-size:0.5em;position:absolute;left:0px;bottom:' + i.toString() + 'px\">&minus;';
+                if (i % 20 === 0)
+                {
+                    if (i-20 === 0)
+                    {
+                      myText += '&nbsp;&nbsp;';
+                    }
+                    else if (i-20 >= 100)
+                    {
+                      myText += '';
+                    }
+                    else
+                    {
+                      myText += '&nbsp;';
+                    }
+                    myText += (i-20).toString();
+                }
+                myText += '<\/div>';
+                document.getElementById('roehre').innerHTML += myText;
+            }
+            myText = '<div id=\"marker_unit\" style=\"font-size:0.5em;position:absolute;left:-2px;bottom:150px\">&deg;F<\/div>';
+            document.getElementById('roehre').innerHTML += myText;
+        }
+    }
+    </script>
+  </head>
+  <body onLoad="labelThermometer()">
+    <div id="thermometer" style="height:150px;width:14px;position:absolute;top:10px;left:10px;z-index:0;">
+      <div id="roehre" style="height:150px;width:4px;position:absolute;left:5px;bottom:0px;background-color:#CCCCFF;border-radius:3px 3px 0px 0px;">
+        <div id="saeule" style="height:45px;width:2px;position:absolute;right:1px;bottom:0px;background-color:navy;z-index:3">
+        </div>
+        <div id="glas" style="height:10px;width:6px;position:absolute;bottom:-9px;left:-1px;background-color:#CCCCFF;border-radius:2px;z-index:1">
+        </div>
+        <div id="quecksilber" style="height:7px;width:4px;position:absolute;bottom:-7px;left:0px;background-color:navy;border-radius:1px;z-index:2">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

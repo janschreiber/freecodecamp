@@ -1,0 +1,11 @@
+@media screen and (min-device-width: 1024px) {
+    .container {
+        padding-left:2em;
+        padding-right:2em;
+    }
+}
+td.left {
+    padding-right:15px;
+    vertical-align:top;
+    font-weight:bold;
+}

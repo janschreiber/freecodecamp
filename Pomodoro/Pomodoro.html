@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <title>Pomodoro Timer</title>
+    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <script type="text/JavaScript" src="script.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" />
+    <link href="styles.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body onload="onDocLoad()" onresize="setLinkPos()">
+    <!-- <h1>Pomodoro<br><span style="font-size:110%;color:#02E903">Timer</span><img src="tomate25_50px.png" style="position:relative;bottom:-4px;left:16px;z-index:-1;" /></h1> -->
+    <h1><img src="Pomodoro Timer.png" alt="Pomodoro Timer" style="width:250px" /></h1>
+    <div id="content">
+      <div id="header"><span id="pomodoro" class="active" onclick="setSeconds('pomodoro', pomodoro_time)">Pomodoro</span> &middot; <span id="5min" class="clickable" onclick="setSeconds('5min', short_break_time)" title="Short break">Short&nbsp;Break</span> &middot; <span id="10min" class="clickable" onclick="setSeconds('10min', long_break_time)" title="Long break">Long&nbsp;Break</span></div>
+      <div id="counter"><span id="minutes">25:</span><span id=seconds>00</span></div>
+      <div>
+        <input type="button" class="btn btn-green" value="Start" onclick="countDown(secs)" title="Start timer" />
+        <input type="button" class="btn btn-red" value="Stop" onclick="stopTimer()" title="Stop timer" />
+        <input type="button" class="btn btn-grey" value="Reset" onclick="resetTimer()" title="Reset timer" />
+      </div>
+      <audio id="alarm"><source src="alarm-clock.mp3" type="audio/mpeg"></audio>
+    </div>
+    <div id="links">
+      <a href="#" data-toggle="modal" data-target="#faqDlg">FAQ</a><br />
+      <a href="#" data-toggle="modal" data-target="#settingsDlg">Settings</a><br />
+    </div>
+
+    <!-- Bootstrap modal dialogs -->
+    <div class="modal fade" id="faqDlg" role="dialog" tabindex="-1" data-keyboard="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">FAQ</h4>
+                </div>
+                <div class="modal-body" style="text-align:left">
+                <b>Q:</b> Why the name "Pomodoro Timer"?<br />
+                <b>A:</b> The Pomodoro Technique is a time management method developed by Francesco Cirillo in the 1980s.
+                It uses a timer to break down work into intervals traditionally 25 minutes in length, separated by short breaks.
+                These intervals are known as "pomodori", the plural of the Italian word pomodoro meaning "tomato".
+                The technique is named after the tomato-shaped kitchen timer that Cirillo used when he was a university student.<br />
+                <b>Q:</b> Who made this, and what is it for?<br />
+                <b>A:</b> This page was created by <a href="http://freecodecamp.com/janschreiber" target="_blank" title="freecodecamp.com/janschreiber">Jan Schreiber</a> 
+                as part of the <a href="http://freecodecamp.com" target="_blank" title="freecodecamp.com">freeCodeCamp</a> JavaScript course.<br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-grey" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="settingsDlg" role="dialog" tabindex="-1" data-keyboard="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Settings</h4>
+                </div>
+                <div class="modal-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="pomodoro">Pomodoro time:&nbsp</label><input id="pomodoro_time" name="pomodoro_time" type="text" placeholder="25" style="width:30px;text-align:center" />&nbsp;minutes<br />
+                      <label for="short_break">Short break:&nbsp</label><input id="short_break" name="short_break" type="text" placeholder="5" style="width:30px;text-align:center" />&nbsp;minutes<br />
+                      <label for="long_break">Long break:&nbsp</label><input id="long_break" name="long_break" type="text" placeholder="10" style="width:30px;text-align:center" />&nbsp;minutes
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-green" data-dismiss="modal" onclick="saveSettings()">Save</button>
+                    <button type="button" class="btn btn-secondary btn-grey" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

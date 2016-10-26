@@ -1,0 +1,152 @@
+body {
+    font-family: "Special Elite", monospace;
+    background-color: rgb(32, 32, 32);
+    color: rgb(239, 239, 239);
+    padding: 10px;
+}
+h1 {
+    text-align: center;
+    font-family: Monoton, sans-serif;
+    font-weight: normal;
+    font-size: 3.5em;
+    color: #fff;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-animation: neon 1.5s ease-in-out infinite alternate;
+    -moz-animation: neon 1.5s ease-in-out infinite alternate;
+    animation: neon 1.5s ease-in-out infinite alternate;
+}
+h2 {
+    font-family: Bangers, cursive;
+    font-weight: normal;
+    font-size: 2.2em;
+    text-align: center;
+    color: rgb(204, 0, 0);
+    text-shadow: 2px 2px 5px rgb(153, 0, 0);
+}
+abbr {
+    text-decoration: none !important;
+    border: none !important;
+}
+a:link {
+    text-decoration: none;
+    color: rgb(204, 0, 0);
+}
+a:visited {
+    text-decoration: none;
+    color: rgb(176, 176, 176);
+}
+a:hover {
+    text-decoration: underline;
+    color: gold;
+}
+a[class="fa"] {
+    color: white;
+    font-size: 2em;
+}
+a[class="fa"]:hover {
+    text-decoration: none;
+    color: gold;
+}
+#container {
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 960px;
+}
+.bubble {
+    position: relative;
+    width: 250px;
+    height: 120px;
+    padding: 0px;
+    background: #FFFFFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: #000000 solid 1px;
+}
+.bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 6px 0 6px 37px;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -37px;
+    top: 81px;
+}
+.bubble:before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 6px 0 6px 37px;
+    border-color: transparent #000000;
+    display: block;
+    width: 0;
+    z-index: 0;
+    right: -38px;
+    top: 81px;
+}
+.list {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+.list li {
+    padding-left: 18px;
+    background-image: url(bullet_hole.gif);
+    background-repeat: no-repeat;
+    background-position: 0 1px;
+}
+
+/* neon glow for webkit */
+
+@-webkit-keyframes neon {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(0, 51, 255), 0 0 70px rgb(0, 51, 255), 0 0 80px rgb(0, 51, 255), 0 0 100px rgb(0, 51, 255), 0 0 150px rgb(0, 51, 255);
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px rgb(0, 51, 255), 0 0 35px rgb(0, 51, 255), 0 0 40px rgb(0, 51, 255), 0 0 50px rgb(0, 51, 255), 0 0 75px rgb(0, 51, 255);
+    }
+}
+
+/* neon glow for Mozilla */
+
+@-moz-keyframes neon {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(0, 51, 255), 0 0 70px rgb(0, 51, 255), 0 0 80px rgb(0, 51, 255), 0 0 100px rgb(0, 51, 255), 0 0 150px rgb(0, 51, 255);
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px rgb(0, 51, 255), 0 0 35px rgb(0, 51, 255), 0 0 40px rgb(0, 51, 255), 0 0 50px rgb(0, 51, 255), 0 0 75px rgb(0, 51, 255);
+    }
+}
+
+/* neon glow for modern browsers */
+
+@keyframes neon {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px rgb(135, 206, 250), 0 0 40px rgb(0, 51, 255), 0 0 70px rgb(0, 51, 255), 0 0 80px rgb(0, 51, 255), 0 0 100px rgb(0, 51, 255), 0 0 150px rgb(0, 51, 255);
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px rgb(135, 206, 250), 0 0 20px rgb(0, 51, 255), 0 0 35px rgb(0, 51, 255), 0 0 40px rgb(0, 51, 255), 0 0 50px rgb(0, 51, 255), 0 0 75px rgb(0, 51, 255);
+    }
+}
+@media (max-device-width:500px and min-device-width:0) {
+    h1 {
+        font-size: 2em;
+    }
+}
+#navbar {
+    color: white;
+    background-color: rgb(32, 32, 32);
+    font-size: 10px;
+    text-align: right;
+    width: 100%;
+    height: 30px;
+    position: fixed;
+    top: 0;
+    right: 1em;
+    margin-bottom: 180px;
+}

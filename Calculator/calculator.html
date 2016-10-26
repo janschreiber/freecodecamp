@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type"   content="text/html; charset=utf-8" />
+        <meta property="og:url"           content="https://example.com" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="jsCalc JavaScript Calculator" />
+        <meta property="og:description"   content="A simple, mobile-friendly JavaScript calculator by Jan Schreiber" />
+        <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" media="screen, print" type="text/css" href="calculator.css" />
+        <title>jsCalc JavaScript Calculator</title>
+        <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="bootstrap.min.js"></script>
+        <script type="text/javascript" src="calculator.js"></script>
+    </head>
+    <body>
+        <noscript><p style="text-align:center;font-weight:bold">Sorry, this page requires JavaScript and will not work for you. <br>
+        Please enable JavaScript or use a different device.</p></noscript>
+
+        <!-- Facebook button -->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.5";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <table id="calculator">
+            <tr>
+                <th colspan="4" id="table_header">
+                    <span style="color:blue;font-family:Lobster,cursive">js</span><span style="font-family:Arial;font-size:96%;">Calc</span><span style="font-family:Arial;font-size:77%"> 1.1 <abbr title="www.freeCodeCamp.com">FCC</abbr></span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="4" id="calc_td_display">
+                    <input type="text" id="display" readonly="readonly" value="0" onkeypress="keyHandler(event)" />
+                </td>
+            </tr>
+            <tr>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_red_text" value="AC" onclick="funcKeyClicked('ac')" title="clear all" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_red_text" value="DEL" onclick="funcKeyClicked('bksp')" title="delete last digit" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_blue_text" value="&#9432;" data-toggle="modal" data-target="#infoDlgOuter" onclick="infoDlgOpen()" style="cursor:help" title="click for info" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_operator" value="+" onclick="funcKeyClicked('+')" />
+                </td>
+            </tr>
+            <tr>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="7" onclick="numKeyClicked(7)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="8" onclick="numKeyClicked(8)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="9" onclick="numKeyClicked(9)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_operator" value="&minus;" onclick="funcKeyClicked('-')" />
+                </td>
+            </tr>
+            <tr>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="4" onclick="numKeyClicked(4)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="5" onclick="numKeyClicked(5)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="6" onclick="numKeyClicked(6)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_operator" value="&times;" onclick="funcKeyClicked('*')" />
+                </td>
+            </tr>
+            <tr>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="1" onclick="numKeyClicked(1)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="2" onclick="numKeyClicked(2)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="3" onclick="numKeyClicked(3)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_operator" value="&divide;" onclick="funcKeyClicked('\/')" />
+                </td>
+            </tr>
+            <tr>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="0" onclick="numKeyClicked(0)" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn" value="." onclick="numKeyClicked('.')" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_operator" value="&plusmn;" onclick="funcKeyClicked('swap_sign')" />
+                </td>
+                <td class="calc_td_btn">
+                    <input type="button" class="calc_btn btn_operator" value="=" onclick="funcKeyClicked('=')" />
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript">initialize();</script>
+
+        <div id="div_social_media">
+            <div><a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this #freeCodeCamp #JavaScript calculator by @janschreiber.">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+            <div class="fb-like" data-href="https://example.com" data-layout="standard" data-action="like" data-show-faces="false" data-share="true" style="text-align:center">
+            </div>
+        </div>
+
+        <!-- Bootstrap modal info dialog -->
+        <div class="modal fade" id="infoDlgOuter" role="dialog" tabindex="-1" data-keyboard="true">
+            <div class="modal-dialog" id="infoDlgInner">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">About</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>This is a simple JavaScript calculator, created by <a href="http://freecodecamp.com/janschreiber" target="_blank" title="freecodecamp.com/janschreiber">Jan Schreiber</a> 
+                        as part of the <a href="http://freecodecamp.com" target="_blank" title="freecodecamp.com">freeCodeCamp</a> JavaScript course.</p>
+                        <p>Background image by <a href="http://www.pixeden.com" target="_blank" title="www.pixeden.com">Pixeden</a>. Used with permission.</p>
+                        <p><a href="https://www.google.com/fonts/specimen/VT323" target="_blank" title="www.google.com/fonts/specimen/VT323">VT323 font</a> (used in the calculator display) by Peter Hull via <a href="https://www.google.com/fonts/" target="_blank" title="www.google.com/fonts/">Google Fonts</a>.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Awesome!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

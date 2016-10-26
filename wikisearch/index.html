@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Search Wikipedia</title>
+    <script type="text/JavaScript" src="jquery-1.11.3.min.js"></script>
+    <script type="text/JavaScript" src="bootstrap.min.js"></script>
+    <script type="text/JavaScript" src="jquery-ui.min.js"></script>
+    <script type="text/JavaScript" src="script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link href="bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="jquery-ui.min.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="styles.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+
+    <h1>Search <!-- &#57391; --> <i class="fa" style="font-size:31px;vertical-align:+1px;letter-spacing:-4px">&#xF266;</i>ikipedia</h1>
+
+    <noscript>
+      <p style="text-align:center;font-weight:bold;color:red;border: 2px solid red;"><span class="icon"><i class="fa fa-exclamation-triangle"></i></span>&nbsp;Sorry, this page requires JavaScript and will not work for you.
+      <br> Please enable JavaScript or use a different device.</p>
+    </noscript>
+
+    <div class="form-group" id="search">
+        <fieldset>
+          <input type="text" name="searchbox" id="searchbox" value="Albert Einstein" autofocus="autofocus" onfocus="this.select();" onkeypress="submitOnEnter(this, event);" style="width:210px;height:37px;white-space:nowrap;" />
+          <button type="button" id="button" class="btn btn-primary" style="" onclick="searchWikipedia()" title="Click or hit &lt;enter&gt; to search"><span class="icon" style="font-size:1.2em"><i class="fa fa-search"></i></span></button><br />
+        </fieldset>
+    </div>
+
+    <div id="result"></div>
+
+    <div id="info" style="position:absolute;top:5px;right:5px"><span class="icon" id="info-button" title="FAQ/Credits" data-toggle="modal" data-target="#infoDlg" style="cursor:pointer;font-size:1.2em"><i class="fa fa-info-circle" style="color:#337AB7"></i></span></div>
+
+    <!-- Bootstrap modal info dialog -->
+    <div class="modal fade" id="infoDlg" role="dialog" tabindex="-1" data-keyboard="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align:center">Info</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This page is a mobile-friendly Wikipedia search tool, created by <a href="http://freecodecamp.com/janschreiber" target="_blank" title="freecodecamp.com/janschreiber">Jan Schreiber</a> 
+                    as part of the <a href="http://freecodecamp.com" target="_blank" title="freecodecamp.com">freeCodeCamp</a> Web development course.</p>
+                    <p>It uses <a href="http://getbootstrap.com" title="getbootstrap.com" target="_blank">Bootstrap</a> (for this dialog), <a href="https://jquery.com" title="jquery.com" target="_blank">jQuery</a> and the Wikipedia API (for the core functionality), <a href="https://jqueryui.com" title="jqueryui.com" target="_blank">jQuery UI</a> (autocomplete feature), and <a href="https://fortawesome.github.io/Font-Awesome" title="fortawesome.github.io/Font-Awesome" target="_blank">Font Awesome</a> icons.</p>
+                    <p>The background image used here is based on the Wikipedia logo created by Paullusmagnus, copyrighted by the <a href="https://wikimediafoundation.org/wiki/Home" title="https://wikimediafoundation.org/wiki/Home" target="_blank">Wikimedia Foundation</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="info_btn" data-dismiss="modal">OkeleyDokeley!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/JavaScript">
+	$("#searchbox").autocomplete({
+	    source: function(request, response) {
+	        // console.log(request.term);
+	        $.ajax({
+	            url: "http://en.wikipedia.org/w/api.php",
+	            dataType: "jsonp",
+	            data: {
+	                'action': "opensearch",
+	                'format': "json",
+	                'search': request.term
+	            },
+	            success: function(data) {
+	                response(data[1]);
+	            }
+	        });
+	    }
+	});
+
+	$( "#button" ).tooltip();
+	$( "#info-button" ).tooltip();
+
+    </script>
+  </body>
+</html>

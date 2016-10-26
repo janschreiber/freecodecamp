@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Simon</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body onload="flashAll()">
+    <h1><img src="h1.png" alt="Simon" /></h1>
+    <div id="circle-container">
+        <div class="quarter" id="top-left" onclick="quarterClicked(this.id)"></div>
+        <div class="quarter" id="top-right" onclick="quarterClicked(this.id)"></div>
+        <div class="quarter" id="bottom-left" onclick="quarterClicked(this.id)"></div>
+        <div class="quarter" id="bottom-right" onclick="quarterClicked(this.id)"></div>
+        <div id="inner">
+            <div id="title">
+                <button class="round-button" id="go" onclick="goButtonClicked()">GO!</button><br /><br /><span id="repetitions">--</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -412,11 +412,25 @@ function makeComputerMove() {
                 cell = myArr[intRandom(0,1)];
             }
         }
+        else if (moves == 3 && myGrid.cells[4] == player && player == x) {
+            if (myGrid.cells[2] == player && myGrid.cells[6] == computer) {
+                cell = 8;
+            }
+            else if (myGrid.cells[0] == player && myGrid.cells[8] == computer) {
+                cell = 6;
+            }
+            else if (myGrid.cells[8] == player && myGrid.cells[0] == computer) {
+                cell = 2;
+            }
+            else if (myGrid.cells[6] == player && myGrid.cells[2] == computer) {
+                cell = 0;
+            }
+        }
     } else if (moves === 1 && myGrid.cells[4] == player) {
         // if player is X and played center, play one of the corners
         cell = corners[intRandom(0,3)];
     } else if (moves === 2 && myGrid.cells[4] == player && computer == x) {
-        // if player is O and played center, take two opposing corners
+        // if player is O and played center, take two opposite corners
         if (myGrid.cells[0] == computer) {
             cell = 8;
         }

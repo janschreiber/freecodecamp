@@ -109,6 +109,7 @@ var moves = 0,
     oText = "<span class=\"o\">o</class>",
     playerText = xText,
     computerText = oText,
+    difficulty = 1,
     myGrid = null;
 
 //==================================
@@ -279,7 +280,8 @@ function initialize() {
     for (var i = 0; i <= myGrid.cells.length - 1; i++) {
         myGrid.cells[i] = 0;
     }
-    setTimeout(assignRoles, 500);
+    // setTimeout(assignRoles, 500);
+    setTimeout(showOptions, 500);
     // debugger;
 }
 
@@ -365,7 +367,8 @@ function restartGame(ask) {
         document.getElementById(id).classList.remove("win-color");
     }
     if (ask === true) {
-        setTimeout(assignRoles, 200);
+        // setTimeout(assignRoles, 200);
+        setTimeout(showOptions, 200);
     } else if (whoseTurn == computer) {
         setTimeout(makeComputerMove, 800);
     }
@@ -386,7 +389,7 @@ function makeComputerMove() {
             cell = myGrid.getFirstWithTwoInARow(player);
         }
         if (cell === false) {
-            if (myGrid.cells[4] === 0) {
+            if (myGrid.cells[4] === 0 && difficulty == 1) {
                 cell = 4;
             } else {
                 myArr = myGrid.getFreeCellIndices();
@@ -394,7 +397,7 @@ function makeComputerMove() {
             }
         }
         // Avoid a catch-22 situation:
-        if (moves == 3 && myGrid.cells[4] == computer && player == x) {
+        if (moves == 3 && myGrid.cells[4] == computer && player == x && difficulty == 1) {
             if (myGrid.cells[7] == player && (myGrid.cells[0] == player || myGrid.cells[2] == player)) {
                 myArr = [6,8];
                 cell = myArr[intRandom(0,1)];
@@ -412,7 +415,7 @@ function makeComputerMove() {
                 cell = myArr[intRandom(0,1)];
             }
         }
-        else if (moves == 3 && myGrid.cells[4] == player && player == x) {
+        else if (moves == 3 && myGrid.cells[4] == player && player == x && difficulty == 1) {
             if (myGrid.cells[2] == player && myGrid.cells[6] == computer) {
                 cell = 8;
             }
@@ -426,10 +429,10 @@ function makeComputerMove() {
                 cell = 0;
             }
         }
-    } else if (moves === 1 && myGrid.cells[4] == player) {
+    } else if (moves === 1 && myGrid.cells[4] == player && difficulty == 1) {
         // if player is X and played center, play one of the corners
         cell = corners[intRandom(0,3)];
-    } else if (moves === 2 && myGrid.cells[4] == player && computer == x) {
+    } else if (moves === 2 && myGrid.cells[4] == player && computer == x && difficulty == 1) {
         // if player is O and played center, take two opposite corners
         if (myGrid.cells[0] == computer) {
             cell = 8;
@@ -448,7 +451,7 @@ function makeComputerMove() {
         cell = corners[intRandom(0,3)];
     } else {
         // choose the center of the board if possible
-        if (myGrid.cells[4] === 0) {
+        if (myGrid.cells[4] === 0 && difficulty == 1) {
             cell = 4;
         } else {
             myArr = myGrid.getFreeCellIndices();
@@ -574,6 +577,53 @@ function announceWinner(text) {
 function askUser(text) {
     document.getElementById("questionText").innerHTML = text;
     document.getElementById("userFeedback").style.display = "block";
+}
+
+function showOptions() {
+    if (player == o) {
+        document.getElementById("rx").checked = false;
+        document.getElementById("ro").checked = true;
+    }
+    else if (player == x) {
+        document.getElementById("rx").checked = true;
+        document.getElementById("ro").checked = false;
+    }
+    if (difficulty === 0) {
+        document.getElementById("r0").checked = true;
+        document.getElementById("r1").checked = false;
+    }
+    else {
+        document.getElementById("r0").checked = false;
+        document.getElementById("r1").checked = true;
+    }
+    document.getElementById("optionsDlg").style.display = "block";
+}
+
+function getOptions() {
+    var diffs = document.getElementsByName('difficulty');
+    for (var i = 0; i < diffs.length; i++) {
+        if (diffs[i].checked) {
+            difficulty = parseInt(diffs[i].value);
+            break;
+            // debugger;
+        }
+    }
+    if (document.getElementById('rx').checked === true) {
+        player = x;
+        computer = o;
+        whoseTurn = player;
+        playerText = xText;
+        computerText = oText;
+    }
+    else {
+        player = o;
+        computer = x;
+        whoseTurn = computer;
+        playerText = oText;
+        computerText = xText;
+        setTimeout(makeComputerMove, 400);
+    }
+    document.getElementById("optionsDlg").style.display = "none";
 }
 
 function closeModal(id) {

@@ -4,6 +4,7 @@ body {
     color: rgb(230, 230, 230);
     text-align: center;
     font-family: 'Indie Flower', 'Comic Sans', cursive;
+    font-size: 0.7em;
 }
 h1 {
     line-height: 1em;
@@ -11,6 +12,20 @@ h1 {
     padding-bottom: 5px;
     font-size: 2.8em;
     font-weight: bold;
+}
+h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+
+}
+h3 {
+    font-size: 1.1em;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    padding: 0;
+    margin: 10px 0 2px 0;
 }
 table {
     margin: 2% auto;
@@ -40,11 +55,11 @@ table {
 }
 .td_list {
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
 }
 .th_list {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
     text-align: center;
     text-decoration: underline;

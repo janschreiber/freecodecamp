@@ -37,7 +37,7 @@ gameplay experience is fairly decent.
 //==================================
 
 // Bind Esc key to closing the modal dialog
-document.onkeypress = function (evt) {
+document.onkeypress = function(evt) {
     evt = evt || window.event;
     var modal = document.getElementsByClassName("modal")[0];
     if (evt.keyCode === 27) {
@@ -46,7 +46,7 @@ document.onkeypress = function (evt) {
 };
 
 // When the user clicks anywhere outside of the modal dialog, close it
-window.onclick = function (evt) {
+window.onclick = function(evt) {
     var modal = document.getElementsByClassName("modal")[0];
     if (evt.target === modal) {
         modal.style.display = "none";
@@ -129,7 +129,7 @@ function Grid() {
 // Returns an array of indices in the original Grid.cells array, not the values
 // of the array elements.
 // Their values can be accessed as Grid.cells[index].
-Grid.prototype.getFreeCellIndices = function () {
+Grid.prototype.getFreeCellIndices = function() {
     var i = 0,
         resultArray = [];
     for (i = 0; i < this.cells.length; i++) {
@@ -144,7 +144,7 @@ Grid.prototype.getFreeCellIndices = function () {
 
 // Get a row (accepts 0, 1, or 2 as argument).
 // Returns the values of the elements.
-Grid.prototype.getRowValues = function (index) {
+Grid.prototype.getRowValues = function(index) {
     if (index !== 0 && index !== 1 && index !== 2) {
         console.error("Wrong arg for getRowValues!");
         return undefined;
@@ -155,7 +155,7 @@ Grid.prototype.getRowValues = function (index) {
 
 // Get a row (accepts 0, 1, or 2 as argument).
 // Returns an array with the indices, not their values.
-Grid.prototype.getRowIndices = function (index) {
+Grid.prototype.getRowIndices = function(index) {
     if (index !== 0 && index !== 1 && index !== 2) {
         console.error("Wrong arg for getRowIndices!");
         return undefined;
@@ -169,7 +169,7 @@ Grid.prototype.getRowIndices = function (index) {
 };
 
 // get a column (values)
-Grid.prototype.getColumnValues = function (index) {
+Grid.prototype.getColumnValues = function(index) {
     if (index !== 0 && index !== 1 && index !== 2) {
         console.error("Wrong arg for getColumnValues!");
         return undefined;
@@ -182,7 +182,7 @@ Grid.prototype.getColumnValues = function (index) {
 };
 
 // get a column (indices)
-Grid.prototype.getColumnIndices = function (index) {
+Grid.prototype.getColumnIndices = function(index) {
     if (index !== 0 && index !== 1 && index !== 2) {
         console.error("Wrong arg for getColumnIndices!");
         return undefined;
@@ -197,7 +197,7 @@ Grid.prototype.getColumnIndices = function (index) {
 // get diagonal cells
 // arg 0: from top-left
 // arg 1: from top-right
-Grid.prototype.getDiagValues = function (arg) {
+Grid.prototype.getDiagValues = function(arg) {
     var cells = [];
     if (arg !== 1 && arg !== 0) {
         console.error("Wrong arg for getDiagValues!");
@@ -217,7 +217,7 @@ Grid.prototype.getDiagValues = function (arg) {
 // get diagonal cells
 // arg 0: from top-left
 // arg 1: from top-right
-Grid.prototype.getDiagIndices = function (arg) {
+Grid.prototype.getDiagIndices = function(arg) {
     if (arg !== 1 && arg !== 0) {
         console.error("Wrong arg for getDiagIndices!");
         return undefined;
@@ -229,7 +229,7 @@ Grid.prototype.getDiagIndices = function (arg) {
 };
 
 // Get first index with two in a row (accepts computer or player as argument)
-Grid.prototype.getFirstWithTwoInARow = function (agent) {
+Grid.prototype.getFirstWithTwoInARow = function(agent) {
     if (agent !== computer && agent !== player) {
         console.error("Function getFirstWithTwoInARow accepts only player or computer as argument.");
         return undefined;
@@ -259,7 +259,7 @@ Grid.prototype.getFirstWithTwoInARow = function (agent) {
     return false;
 };
 
-Grid.prototype.reset = function () {
+Grid.prototype.reset = function() {
     for (var i = 0; i < this.cells.length; i++) {
         this.cells[i] = 0;
     }
